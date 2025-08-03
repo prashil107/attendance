@@ -4,7 +4,17 @@ const API_ENDPOINT = 'https://bxxm033qmi.execute-api.us-east-1.amazonaws.com/pro
 // Helper function to display messages
 function showMessage(text, isError = false) {
     const messageEl = document.getElementById('message');
-    messageEl.style.color = isError ? 'red' : 'green';
+    
+    // Clear previous classes
+    messageEl.classList.remove('success', 'error');
+
+    // Add new class based on message type
+    if (isError) {
+        messageEl.classList.add('error');
+    } else {
+        messageEl.classList.add('success');
+    }
+    
     messageEl.textContent = text;
 }
 
@@ -21,7 +31,6 @@ document.getElementById('attendance-form').addEventListener('submit', async (e) 
         return;
     }
 
-    // The payload no longer needs a client-side timestamp
     const payload = {
         studentId,
         studentName,
